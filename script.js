@@ -5,12 +5,12 @@
   // List of files in your gallery
 // For now, you can hardcode some examples
 const files = [
-  'owlStencil.png',
-  'owlStencil.png',
-  'owlStencil.png',
-  'owlStencil.png',
-  'owlStencil.png',
-  'owlStencil.png'
+  'assets/owlStencil.png',
+  'assets/owlStencil.png',
+  'assets/owlStencil.png',
+  'assets/owlStencil.png',
+  'assets/owlStencil.png',
+  'assets/owlStencil.png'
 ];
 
 const gallery = document.getElementById('gallery');
@@ -23,7 +23,7 @@ files.forEach(file => {
   // Display PDF or image
   if (file.endsWith('.pdf')) {
     const iframe = document.createElement('iframe');
-    iframe.src = `assets/${file}`;
+    iframe.src = `${file}`;
     iframe.title = file;
     iframe.width = '100%';
     iframe.height = '600px';
@@ -33,7 +33,7 @@ files.forEach(file => {
     container.appendChild(iframe);
   } else {
     const img = document.createElement('img');
-    img.src = `assets/${file}`;
+    img.src = `${file}`;
     img.alt = file;
     img.loading = 'lazy';
     img.style.maxWidth = '100%';
