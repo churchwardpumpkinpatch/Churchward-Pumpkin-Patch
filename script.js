@@ -1,6 +1,7 @@
 // Currently static example, will load files from manifest later
 const files = [
-    'assets/pumpkinstencil24.pdf'
+    'assets/pumpkinstencil24.pdf',
+    'owlStencil.png'
   ];
   
   const gallery = document.getElementById('gallery');
