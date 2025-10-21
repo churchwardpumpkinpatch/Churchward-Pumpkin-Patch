@@ -1,27 +1,66 @@
-// Currently static example, will load files from manifest later
+
+  
+
+
+  // List of files in your gallery
+// For now, you can hardcode some examples
 const files = [
-    'assets/owlStencil.png'
-  ];
-  
-  const gallery = document.getElementById('gallery');
-  
-  files.forEach(file => {
-    if (file.endsWith('.pdf')) {
-      const iframe = document.createElement('iframe');
-      iframe.src = file;
-      iframe.title = file;
-      iframe.width = '100%';
-      iframe.height = '600px';
-      iframe.style.border = '1px solid #444';
-      iframe.style.borderRadius = '8px';
-      iframe.style.marginBottom = '1em';
-      gallery.appendChild(iframe);
-    } else {
-      const img = document.createElement('img');
-      img.src = file;
-      img.alt = file;
-      img.loading = 'lazy';
-      gallery.appendChild(img);
+  'assets/owlStencil.png',
+  'assets/owlStencil.png',
+  'assets/owlStencil.png',
+  'assets/owlStencil.png',
+  'assets/owlStencil.png',
+  'assets/owlStencil.png'
+];
+
+const gallery = document.getElementById('gallery');
+
+files.forEach(file => {
+  // Container for each item + button
+  const container = document.createElement('div');
+  container.classList.add('item-container');
+
+  // Display PDF or image
+  if (file.endsWith('.pdf')) {
+    const iframe = document.createElement('iframe');
+    iframe.src = `assets/${file}`;
+    iframe.title = file;
+    iframe.width = '100%';
+    iframe.height = '600px';
+    iframe.style.border = '1px solid #444';
+    iframe.style.borderRadius = '8px';
+    iframe.style.marginBottom = '0.5em';
+    container.appendChild(iframe);
+  } else {
+    const img = document.createElement('img');
+    img.src = `assets/${file}`;
+    img.alt = file;
+    img.loading = 'lazy';
+    img.style.maxWidth = '100%';
+    container.appendChild(img);
+  }
+
+  // Create Print button
+  const btn = document.createElement('button');
+  btn.textContent = 'Print';
+  btn.classList.add('print-btn');
+
+  // Event listener for printing
+  btn.addEventListener('click', async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/print?file=${encodeURIComponent(file)}`
+      );
+
+      if (!response.ok) throw new Error('Print failed');
+
+      alert(`Printing ${file}...`);
+    } catch (err) {
+      console.error(err);
+      alert(`Failed to print ${file}`);
     }
   });
-  
+
+  container.appendChild(btn);
+  gallery.appendChild(container);
+});
