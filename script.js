@@ -1,6 +1,5 @@
 // Currently static example, will load files from manifest later
 const files = [
-    'assets/pumpkinstencil24.pdf',
     'assets/owlStencil.png'
   ];
   
