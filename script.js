@@ -23,23 +23,25 @@ async function loadImages() {
 
     // For each image file, get a temporary link
     for (const entry of data.entries) {
-      if (entry['.tag'] === 'file' && /\.(jpg|jpeg|png|gif)$/i.test(entry.name)) {
-        const linkRes = await fetch('https://api.dropboxapi.com/2/files/get_temporary_link', {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ path: entry.path_lower })
-        });
-
-        const linkData = await linkRes.json();
-        const img = document.createElement('img');
-        img.src = linkData.link;
-        img.alt = entry.name;
-        img.loading = 'lazy';
-        gallery.appendChild(img);
-      }
+      // inside your loop over Dropbox files
+        if (/\.(jpg|jpeg|png|gif)$/i.test(entry.name)) {
+            // Images
+            const img = document.createElement('img');
+            img.src = linkData.link;
+            img.alt = entry.name;
+            img.loading = 'lazy';
+            gallery.appendChild(img);
+        } else if (/\.pdf$/i.test(entry.name)) {
+            // PDFs
+            const iframe = document.createElement('iframe');
+            iframe.src = linkData.link;
+            iframe.width = '100%';
+            iframe.height = '600px';       // adjust height as needed
+            iframe.style.border = '1px solid #444';
+            iframe.style.borderRadius = '8px';
+            iframe.title = entry.name;
+            gallery.appendChild(iframe);
+        }
     }
   } catch (err) {
     console.error('Error loading images:', err);
