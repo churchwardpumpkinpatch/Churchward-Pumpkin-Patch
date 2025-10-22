@@ -5,12 +5,12 @@
   // List of files in your gallery
 // For now, you can hardcode some examples
 const files = [
-  'assets/owlStencil.png',
-  'assets/owlStencil.png',
-  'assets/owlStencil.png',
-  'assets/owlStencil.png',
-  'assets/owlStencil.png',
-  'assets/owlStencil.png'
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf'
 ];
 
 const gallery = document.getElementById('gallery');
