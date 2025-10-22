@@ -104,3 +104,13 @@ body {
 @media (max-width: 600px) {
   .pdf-wrapper { aspect-ratio: 3 / 4; } /* tweak smaller phones if needed */
 }
+
+.gallery-item {
+  width: 100%;
+  height: auto;
+  max-height: 90vh;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 1em;
+  border-radius: 8px;
+}
