@@ -22,12 +22,12 @@ files.forEach(file => {
 
   // Display PDF or image
   if (file.endsWith('.pdf')) {
-    // Show the PDF as an embedded object for scrolling
     const embed = document.createElement('embed');
     embed.src = file;
     embed.type = 'application/pdf';
-    embed.width = '100%';
-    embed.height = '600px';
+    embed.style.width = '100%';
+    embed.style.height = 'auto';
+    embed.style.aspectRatio = '8.5 / 11'; // standard PDF aspect ratio
     embed.style.border = '1px solid #444';
     embed.style.borderRadius = '8px';
     container.appendChild(embed);
@@ -36,7 +36,8 @@ files.forEach(file => {
     img.src = file;
     img.alt = file;
     img.loading = 'lazy';
-    img.style.maxWidth = '100%';
+    img.style.width = '100%';
+    img.style.height = 'auto';
     container.appendChild(img);
   }
 
