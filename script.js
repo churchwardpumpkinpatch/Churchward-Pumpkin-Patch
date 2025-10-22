@@ -22,11 +22,11 @@ files.forEach(file => {
 
   // Display PDF or image
   if (file.endsWith('.pdf')) {
-    const embed = document.createElement('embed');
-    embed.src = file;
-    embed.type = 'application/pdf';
-    embed.classList.add('gallery-item');
-    container.appendChild(embed);
+    const img = document.createElement('img');
+    img.src = `https://docs.google.com/gview?embedded=true&url=${location.origin}/${file}`;
+    img.alt = file;
+    img.classList.add('gallery-item');
+    container.appendChild(img);
   } else {
     const img = document.createElement('img');
     img.src = file;
@@ -34,6 +34,7 @@ files.forEach(file => {
     img.classList.add('gallery-item');
     container.appendChild(img);
   }
+  
 
   // Create Print button
   const btn = document.createElement('button');
