@@ -22,12 +22,15 @@ files.forEach(file => {
 
   // Display PDF or image
   if (file.endsWith('.pdf')) {
-    const link = document.createElement('a');
-    link.href = file;
-    link.textContent = file.split('/').pop();
-    link.target = '_blank';
-    link.classList.add('pdf-preview');
-    container.appendChild(link);
+    // Show the PDF as an embedded object for scrolling
+    const embed = document.createElement('embed');
+    embed.src = file;
+    embed.type = 'application/pdf';
+    embed.width = '100%';
+    embed.height = '600px';
+    embed.style.border = '1px solid #444';
+    embed.style.borderRadius = '8px';
+    container.appendChild(embed);
   } else {
     const img = document.createElement('img');
     img.src = file;
