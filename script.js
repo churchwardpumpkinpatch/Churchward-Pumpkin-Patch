@@ -1,7 +1,7 @@
 const files = [
-  'assets/owlStencil.pdf',
-  'assets/pumpkinStencil.pdf',
-  'assets/catStencil.pdf'
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf'
 ];
 
 const gallery = document.getElementById('gallery');
