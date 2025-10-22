@@ -33,13 +33,13 @@ h1 {
   box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-/* === Image / PDF Preview === */
+/* === Image Preview Styling === */
 .gallery-item {
   display: block;
   width: 100%;
   height: auto;
-  object-fit: contain;
   border-radius: 10px;
+  object-fit: contain;
   background: #222;
 }
 

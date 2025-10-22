@@ -1,10 +1,5 @@
-// List of PDF files (assume PDFs are in 'assets/' folder)
+// List of PDF files
 const files = [
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf'
@@ -16,8 +11,8 @@ files.forEach(file => {
   const container = document.createElement('div');
   container.classList.add('item-container');
 
-  // Display PDF as an image preview
-  // Assumes you have corresponding PNG/JPG with same name
+  // Display the PDF as an image
+  // You must generate PNG/JPG previews for each PDF (same name, different extension)
   const previewFile = file.replace('.pdf', '.png'); 
   const img = document.createElement('img');
   img.src = previewFile;
@@ -25,12 +20,11 @@ files.forEach(file => {
   img.classList.add('gallery-item');
   container.appendChild(img);
 
-  // Create Print button
+  // Print button for original PDF
   const btn = document.createElement('button');
   btn.textContent = 'Print';
   btn.classList.add('print-btn');
 
-  // Print original PDF
   btn.addEventListener('click', () => {
     const newTab = window.open(file, '_blank');
     if (newTab) {
