@@ -1,31 +1,26 @@
-/* Body & general layout */
 body {
   font-family: system-ui, sans-serif;
   background: #111;
   color: #eee;
   margin: 0;
-  padding: 0; /* remove extra padding so sticky header works nicely */
+  padding: 0;
 }
 
 /* Header / title */
 h1 {
-  position: sticky; /* stays visible at top while scrolling */
+  position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: #111; /* same as body to blend */
-  color: orange; /* Halloween theme */
+  background-color: #111;
+  color: orange;
   text-align: center;
   margin: 0;
   padding: 1em;
-  font-family: 'Creepster', cursive; /* spooky font from Google Fonts */
+  font-family: 'Metal Mania', cursive; /* spooky metal font */
   font-size: 2.5em;
-  text-shadow: 2px 2px 5px #000;
+  text-shadow: 3px 3px 6px #000;
   border-bottom: 2px solid orange;
 }
-
-/* Make sure to include Google Fonts in index.html head:
-<link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-*/
 
 .gallery {
   display: flex;
