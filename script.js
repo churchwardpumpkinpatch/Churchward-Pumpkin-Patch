@@ -48,10 +48,9 @@ files.forEach(file => {
   // Event listener for printing
   btn.addEventListener('click', async () => {
     try {
-      const host = window.location.hostname || 'localhost';
-      const response = await fetch(`http://${host}:3000/print?file=${encodeURIComponent(file)}`);
-
-
+      const response = await fetch(
+        `http://localhost:3000/print?file=${encodeURIComponent(file)}`
+      );
 
       if (!response.ok) throw new Error('Print failed');
 
