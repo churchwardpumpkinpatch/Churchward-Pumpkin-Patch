@@ -1,10 +1,6 @@
 const files = [
   'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf'
 ];
 
@@ -14,11 +10,12 @@ files.forEach(async file => {
   const container = document.createElement('div');
   container.classList.add('item-container');
 
-  // Render PDF to canvas
+  // Create canvas for PDF page
   const canvas = document.createElement('canvas');
   canvas.classList.add('gallery-item');
   container.appendChild(canvas);
 
+  // Render first page of PDF using PDF.js 2.x
   const loadingTask = pdfjsLib.getDocument(file);
   const pdf = await loadingTask.promise;
   const page = await pdf.getPage(1);
