@@ -68,3 +68,14 @@ h1 {
   .gallery {
     gap: 1em;
   }
+
+  .print-btn {
+    font-size: 1em;
+    padding: 24px 48px;
+  }
+
+  .gallery-item {
+    width: 100%;
+    height: auto;
+  }
+}
