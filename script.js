@@ -22,16 +22,17 @@ files.forEach(file => {
 
   // Display PDF or image
   if (file.endsWith('.pdf')) {
+    const wrap = document.createElement('div');
+    wrap.className = 'pdf-wrapper';
+  
     const embed = document.createElement('embed');
     embed.src = file;
     embed.type = 'application/pdf';
-    embed.style.width = '100%';
-    embed.style.height = 'auto';
-    embed.style.aspectRatio = '8.5 / 11'; // standard PDF aspect ratio
-    embed.style.border = '1px solid #444';
-    embed.style.borderRadius = '8px';
-    container.appendChild(embed);
-  } else {
+    embed.className = 'pdf-embed';
+  
+    wrap.appendChild(embed);
+    container.appendChild(wrap);
+  }  else {
     const img = document.createElement('img');
     img.src = file;
     img.alt = file;
