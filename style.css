@@ -20,6 +20,7 @@ h1 {
   padding: 0 1em;
   max-width: 900px;
   margin: 0 auto;
+  overflow-y: auto;
 }
 
 /* === Item Container === */
@@ -27,21 +28,18 @@ h1 {
   position: relative;
   display: block;
   width: 100%;
-  max-width: 100%;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-/* === Images & PDFs === */
-.gallery-item,
-embed.gallery-item {
+/* === Image / PDF Preview === */
+.gallery-item {
   display: block;
   width: 100%;
   height: auto;
-  border: none;
-  border-radius: 10px;
   object-fit: contain;
+  border-radius: 10px;
   background: #222;
 }
 
@@ -70,36 +68,3 @@ embed.gallery-item {
   .gallery {
     gap: 1em;
   }
-
-  .print-btn {
-    font-size: 1em;
-    padding: 24px 48px;
-  }
-
-  
-  embed.gallery-item {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-  }
-}
-
-embed.gallery-item {
-  width: 100% !important;
-  height: auto !important;
-  min-height: 80vh !important;
-  display: block !important;
-  border: none !important;
-  overflow: visible !important;
-  background: #222 !important;
-}
-
-.gallery-item {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  border-radius: 10px;
-  background: #222;
-}
-
