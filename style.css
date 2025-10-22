@@ -83,3 +83,13 @@ embed.gallery-item {
     max-width: 100%;
   }
 }
+
+embed.gallery-item {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 80vh !important;
+  display: block !important;
+  border: none !important;
+  overflow: visible !important;
+  background: #222 !important;
+}
