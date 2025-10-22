@@ -49,11 +49,30 @@ files.forEach(file => {
 
   // Event listener for printing
   
-  btn.addEventListener('click', () => {
-    const newWindow = window.open(file, '_blank');
-    if (newWindow) newWindow.print();
-  });
+  // btn.addEventListener('click', () => {
+  //   const newWindow = window.open(file, '_blank');
+  //   if (newWindow) newWindow.print();
+  // });
+
+  btn.onclick = () => printFile(file);
 
   container.appendChild(btn);
   gallery.appendChild(container);
 });
+
+function printFile(file) {
+  const newTab = window.open(file, '_blank');
+
+  // wait until PDF is ready before triggering print
+  if (newTab) {
+    const checkReady = setInterval(() => {
+      if (newTab.document && newTab.document.readyState === 'complete') {
+        clearInterval(checkReady);
+        newTab.focus();
+        newTab.print();  // open native print dialog
+      }
+    }, 300);
+  } else {
+    alert('Please allow pop-ups to enable printing.');
+  }
+}
