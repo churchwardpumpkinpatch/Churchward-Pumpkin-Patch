@@ -46,19 +46,10 @@ files.forEach(file => {
   btn.classList.add('print-btn');
 
   // Event listener for printing
-  btn.addEventListener('click', async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/print?file=${encodeURIComponent(file)}`
-      );
-
-      if (!response.ok) throw new Error('Print failed');
-
-      alert(`Printing ${file}...`);
-    } catch (err) {
-      console.error(err);
-      alert(`Failed to print ${file}`);
-    }
+  
+  btn.addEventListener('click', () => {
+    const newWindow = window.open(file, '_blank');
+    if (newWindow) newWindow.print();
   });
 
   container.appendChild(btn);
