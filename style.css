@@ -1,131 +1,85 @@
+/* === Global Styles === */
 body {
-    font-family: system-ui, sans-serif;
-    background: #111;
-    color: #eee;
-    margin: 0;
-    padding: 1.5em;
-  }
-  
-  h1 {
-    margin-bottom: 1em;
-    text-align: center;
-  }
-  
-  .gallery {
-    display: flex;
-    flex-direction: column; /* we can change to grid later if needed */
-    gap: 1em;
-    max-height: 90vh;
-    overflow-y: auto;
-    padding: 0 1em;
-  }
-  
-  .gallery img,
-  .gallery iframe {
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-  }
-  
-  .gallery iframe {
-    border: 1px solid #444;
-    background: #222;
-    height: 600px; /* adjust height for PDFs */
-  }
-  
-  .print-btn {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background-color: orange;
-    color: white;
-    font-size: 1.2em;
-    padding: 36px 72px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    transition: transform 0.1s ease;
-  }
-  
-  .print-btn:hover {
-    transform: scale(1.05);
-  }
-  
-  .item-container {
-    position: relative;
-    display: inline-block;
-    margin: 10px;
-  }
+  font-family: system-ui, sans-serif;
+  background: #111;
+  color: #eee;
+  margin: 0;
+  padding: 1.5em;
+}
 
-  .pdf-preview {
-    display: block;
-    width: 100%;
-    height: 200px;
-    background: #f2f2f2;
-    color: #333;
-    text-align: center;
-    line-height: 200px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    text-decoration: none;
-    overflow: hidden;
-  }
-  
-  .pdf-preview:hover {
-    background: #ddd;
-  }
+h1 {
+  margin-bottom: 1em;
+  text-align: center;
+}
 
-  /* wrapper keeps correct aspect ratio and remains responsive */
-.pdf-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 900px;      /* optional: limit very wide screens */
+/* === Gallery Layout === */
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  padding: 0 1em;
+  max-width: 900px;
   margin: 0 auto;
-  aspect-ratio: 8.5 / 11; /* standard PDF paper ratio; adjust if needed */
-  background: #222;
-  border-radius: 8px;
+}
+
+/* === Item Container === */
+.item-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-/* embed fills wrapper without stretching */
-.pdf-embed {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-/* ensure tall items don't push page off-screen on mobile */
-.item-container { 
-  max-width: 100%;
-}
-@media (max-width: 600px) {
-  .pdf-wrapper { aspect-ratio: 3 / 4; } /* tweak smaller phones if needed */
-}
-
-.gallery-item {
+/* === Images & PDFs === */
+.gallery-item,
+embed.gallery-item {
+  display: block;
   width: 100%;
   height: auto;
-  max-width: 800px;
-  display: block;
-  margin: 0 auto 1em;
+  border: none;
   border-radius: 10px;
   object-fit: contain;
+  background: #222;
 }
 
-embed.gallery-item {
-  height: auto;
-  aspect-ratio: 1 / 1.3; /* Keeps PDFs nicely proportioned */
-  display: block;
+/* === Print Button === */
+.print-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: orange;
+  color: white;
+  font-size: 1.3em;
+  padding: 36px 72px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.1s ease;
 }
 
+.print-btn:hover {
+  transform: scale(1.05);
+}
+
+/* === Responsive Tweaks === */
 @media (max-width: 600px) {
+  .gallery {
+    gap: 1em;
+  }
+
+  .print-btn {
+    font-size: 1em;
+    padding: 24px 48px;
+  }
+
   .gallery-item,
   embed.gallery-item {
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    max-width: 100%;
   }
 }
-
