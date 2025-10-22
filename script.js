@@ -1,5 +1,8 @@
-// List of PDF files
 const files = [
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf'
@@ -7,20 +10,25 @@ const files = [
 
 const gallery = document.getElementById('gallery');
 
-files.forEach(file => {
+files.forEach(async file => {
   const container = document.createElement('div');
   container.classList.add('item-container');
 
-  // Display the PDF as an image
-  // You must generate PNG/JPG previews for each PDF (same name, different extension)
-  const previewFile = file.replace('.pdf', '.png'); 
-  const img = document.createElement('img');
-  img.src = previewFile;
-  img.alt = file;
-  img.classList.add('gallery-item');
-  container.appendChild(img);
+  // Render PDF to canvas
+  const canvas = document.createElement('canvas');
+  canvas.classList.add('gallery-item');
+  container.appendChild(canvas);
 
-  // Print button for original PDF
+  const loadingTask = pdfjsLib.getDocument(file);
+  const pdf = await loadingTask.promise;
+  const page = await pdf.getPage(1);
+  const viewport = page.getViewport({ scale: 1 });
+  canvas.width = viewport.width;
+  canvas.height = viewport.height;
+  const context = canvas.getContext('2d');
+  await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+  // Print button
   const btn = document.createElement('button');
   btn.textContent = 'Print';
   btn.classList.add('print-btn');
