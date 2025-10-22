@@ -22,18 +22,15 @@ files.forEach(file => {
 
   // Display PDF or image
   if (file.endsWith('.pdf')) {
-    const iframe = document.createElement('iframe');
-    iframe.src = `${file}`;
-    iframe.title = file;
-    iframe.width = '100%';
-    iframe.height = '600px';
-    iframe.style.border = '1px solid #444';
-    iframe.style.borderRadius = '8px';
-    iframe.style.marginBottom = '0.5em';
-    container.appendChild(iframe);
+    const link = document.createElement('a');
+    link.href = file;
+    link.textContent = file.split('/').pop();
+    link.target = '_blank';
+    link.classList.add('pdf-preview');
+    container.appendChild(link);
   } else {
     const img = document.createElement('img');
-    img.src = `${file}`;
+    img.src = file;
     img.alt = file;
     img.loading = 'lazy';
     img.style.maxWidth = '100%';
