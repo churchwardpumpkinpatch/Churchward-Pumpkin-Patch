@@ -29,8 +29,10 @@ h1 {
   height: auto;
   display: block;
   border-radius: 10px;
+  max-width: 100%;
 }
 
+/* Print button overlay bottom-left */
 .print-btn {
   position: absolute;
   bottom: 10px;
@@ -50,6 +52,7 @@ h1 {
   transform: scale(1.05);
 }
 
+/* Mobile adjustments */
 @media (max-width: 600px) {
   .gallery-item {
     width: 100%;

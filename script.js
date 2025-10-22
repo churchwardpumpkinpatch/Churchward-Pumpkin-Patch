@@ -1,7 +1,7 @@
 const files = [
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf'
+  'assets/owlStencil.pdf',
+  'assets/pumpkinStencil.pdf',
+  'assets/catStencil.pdf'
 ];
 
 const gallery = document.getElementById('gallery');
@@ -10,26 +10,30 @@ files.forEach(async file => {
   const container = document.createElement('div');
   container.classList.add('item-container');
 
-  // Create canvas for PDF page
+  // Canvas for PDF page
   const canvas = document.createElement('canvas');
   canvas.classList.add('gallery-item');
   container.appendChild(canvas);
 
-  // Render first page of PDF using PDF.js 2.x
   const loadingTask = pdfjsLib.getDocument(file);
   const pdf = await loadingTask.promise;
   const page = await pdf.getPage(1);
+
+  // Determine scale to fit width while preserving aspect ratio
   const viewport = page.getViewport({ scale: 1 });
-  canvas.width = viewport.width;
-  canvas.height = viewport.height;
+  const maxWidth = Math.min(viewport.width, window.innerWidth - 32); // 16px padding each side
+  const scale = maxWidth / viewport.width;
+  const scaledViewport = page.getViewport({ scale });
+
+  canvas.width = scaledViewport.width;
+  canvas.height = scaledViewport.height;
   const context = canvas.getContext('2d');
-  await page.render({ canvasContext: context, viewport: viewport }).promise;
+  await page.render({ canvasContext: context, viewport: scaledViewport }).promise;
 
   // Print button
   const btn = document.createElement('button');
   btn.textContent = 'Print';
   btn.classList.add('print-btn');
-
   btn.addEventListener('click', () => {
     const newTab = window.open(file, '_blank');
     if (newTab) {
