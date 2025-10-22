@@ -32,3 +32,27 @@ body {
     height: 600px; /* adjust height for PDFs */
   }
   
+  .print-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: orange;
+    color: white;
+    font-size: 1.2em;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s ease;
+  }
+  
+  .print-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  .item-container {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+  }
