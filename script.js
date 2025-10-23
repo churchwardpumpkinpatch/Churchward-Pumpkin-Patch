@@ -1,13 +1,4 @@
-
-
-
-// Ensure pdf.js is loaded
-pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
-
-// const pdfFiles = ["file1.pdf", "file2.pdf", "file3.pdf"]; // your PDFs here
-
-
-const pdfFiles = [
+const files = [
   'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf',
@@ -32,55 +23,51 @@ const pdfFiles = [
 ];
 
 
+const gallery = document.getElementById('gallery');
 
+files.forEach(async file => {
+  const container = document.createElement('div');
+  container.classList.add('item-container');
 
-const gallery = document.querySelector(".gallery");
+  // Canvas for PDF page
+  const canvas = document.createElement('canvas');
+  canvas.classList.add('gallery-item');
+  container.appendChild(canvas);
 
-async function renderPDFToImage(file, index) {
-  const pdf = await pdfjsLib.getDocument(file).promise;
+  const loadingTask = pdfjsLib.getDocument(file);
+  const pdf = await loadingTask.promise;
   const page = await pdf.getPage(1);
-  const viewport = page.getViewport({ scale: 2 });
 
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
-  canvas.width = viewport.width;
-  canvas.height = viewport.height;
-  await page.render({ canvasContext: context, viewport }).promise;
+  // Determine scale to fit width while preserving aspect ratio
+  const viewport = page.getViewport({ scale: 1 });
+  const maxWidth = Math.min(viewport.width, window.innerWidth - 32); // 16px padding each side
+  const scale = maxWidth / viewport.width;
+  const scaledViewport = page.getViewport({ scale });
 
-  const img = document.createElement("img");
-  img.src = canvas.toDataURL();
-  img.alt = `Preview of ${file}`;
-  img.classList.add("gallery-item");
-
-  // Create the container
-  const container = document.createElement("div");
-  container.classList.add("item-container");
-
-  // Add the buttons
-  const buttonContainer = document.createElement("div");
-  buttonContainer.classList.add("button-container");
-
-  // Number button (auto-generated)
-  const numBtn = document.createElement("button");
-  numBtn.classList.add("num-btn");
-  numBtn.textContent = index + 1;
+  canvas.width = scaledViewport.width;
+  canvas.height = scaledViewport.height;
+  const context = canvas.getContext('2d');
+  await page.render({ canvasContext: context, viewport: scaledViewport }).promise;
 
   // Print button
-  const printBtn = document.createElement("button");
-  printBtn.classList.add("print-btn");
-  printBtn.textContent = "Print";
-  printBtn.onclick = () => {
-    window.open(file, "_blank").print();
-  };
+  const btn = document.createElement('button');
+  btn.textContent = 'Print';
+  btn.classList.add('print-btn');
+  btn.addEventListener('click', () => {
+    const newTab = window.open(file, '_blank');
+    if (newTab) {
+      const checkReady = setInterval(() => {
+        if (newTab.document && newTab.document.readyState === 'complete') {
+          clearInterval(checkReady);
+          newTab.focus();
+          newTab.print();
+        }
+      }, 300);
+    } else {
+      alert('Please allow pop-ups to enable printing.');
+    }
+  });
 
-  buttonContainer.appendChild(numBtn);
-  buttonContainer.appendChild(printBtn);
-  container.appendChild(img);
-  container.appendChild(buttonContainer);
+  container.appendChild(btn);
   gallery.appendChild(container);
-}
-
-// Render all PDFs in order
-pdfFiles.forEach((file, index) => {
-  renderPDFToImage(file, index);
 });
