@@ -19,32 +19,27 @@ h1 {
   text-align: center;
   margin: 0;
   padding: 1em;
-  font-family: 'Metal Mania', cursive; /* spooky metal font */
+  font-family: 'Metal Mania', cursive;
   font-size: 2.5em;
   text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600;
   border-bottom: 2px solid orange;
 
-  /* Glowing / flicker animation */
-  animation: flicker 1.5s infinite alternate;
+  /* Sporadic flicker/glow animation */
+  animation: flicker 2s infinite;
 }
 
-/* Flicker keyframes for glowing effect */
+/* Sporadic flicker keyframes */
 @keyframes flicker {
-  0% {
-    text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600;
-  }
-  25% {
-    text-shadow: 0 0 8px #ff6600, 0 0 15px #ff6600, 0 0 30px #ff6600;
-  }
-  50% {
-    text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600;
-  }
-  75% {
-    text-shadow: 0 0 12px #ff6600, 0 0 20px #ff6600, 0 0 40px #ff6600;
-  }
-  100% {
-    text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600;
-  }
+  0%   { text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600; }
+  5%   { text-shadow: 0 0 15px #ff6600, 0 0 25px #ff6600, 0 0 50px #ff6600; }
+  10%  { text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600; }
+  25%  { text-shadow: 0 0 12px #ff6600, 0 0 22px #ff6600, 0 0 40px #ff6600; }
+  30%  { text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600; }
+  50%  { text-shadow: 0 0 18px #ff6600, 0 0 30px #ff6600, 0 0 60px #ff6600; }
+  60%  { text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600; }
+  75%  { text-shadow: 0 0 20px #ff6600, 0 0 35px #ff6600, 0 0 70px #ff6600; }
+  90%  { text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600; }
+  100% { text-shadow: 0 0 8px #ff6600, 0 0 15px #ff6600, 0 0 30px #ff6600; }
 }
 
 /* Gallery container */
@@ -62,42 +57,4 @@ h1 {
   width: 100%;
 }
 
-.gallery-item {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 10px;
-  max-width: 100%;
-}
-
-/* Print button overlay bottom-left */
-.print-btn {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background-color: orange;
-  color: white;
-  font-size: 1.3em;
-  padding: 36px 72px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  transition: transform 0.1s ease;
-}
-
-.print-btn:hover {
-  transform: scale(1.05);
-}
-
-/* Mobile adjustments */
-@media (max-width: 600px) {
-  .gallery-item {
-    width: 100%;
-    height: auto;
-  }
-  .print-btn {
-    font-size: 1em;
-    padding: 24px 48px;
-  }
-}
+.galle
