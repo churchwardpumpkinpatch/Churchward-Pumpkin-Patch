@@ -1,6 +1,24 @@
 const files = [
   'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf'
 ];
 
