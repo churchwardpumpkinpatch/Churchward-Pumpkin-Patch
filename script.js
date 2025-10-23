@@ -54,9 +54,9 @@ files.forEach(async file => {
 
   // Number button
   const nmb = document.createElement('nmbButton');
-  btn.textContent = count;
+  nmb.textContent = count;
+  nmb.classList.add('nmb-btn');
   count += 1;
-  btn.classList.add('nmb-btn');
  
   // Print button
   const btn = document.createElement('button');
@@ -77,6 +77,7 @@ files.forEach(async file => {
     }
   });
 
+  container.appendChild(nmb);
   container.appendChild(btn);
   gallery.appendChild(container);
 });
