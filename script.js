@@ -25,6 +25,8 @@ const files = [
 
 const gallery = document.getElementById('gallery');
 
+let count = 1;
+
 files.forEach(async file => {
   const container = document.createElement('div');
   container.classList.add('item-container');
@@ -49,6 +51,13 @@ files.forEach(async file => {
   const context = canvas.getContext('2d');
   await page.render({ canvasContext: context, viewport: scaledViewport }).promise;
 
+
+  // Number button
+  const nmb = document.createElement('nmbButton');
+  btn.textContent = count;
+  count += 1;
+  btn.classList.add('nmb-btn');
+ 
   // Print button
   const btn = document.createElement('button');
   btn.textContent = 'Print';

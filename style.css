@@ -66,6 +66,23 @@ h1 {
   transition: transform 0.1s ease;
 }
 
+/* Print button overlay bottom-left */
+.nmb-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: orange;
+  color: black; /* updated per previous request */
+  font-family: 'Metal Mania', cursive;
+  font-size: 1.2em;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: transform 0.1s ease;
+}
+
 .print-btn:hover {
   transform: scale(1.05);
 }
@@ -84,5 +101,9 @@ h1 {
   .print-btn {
     font-size: 1.5em;
     padding: 12px 24px;
+  }
+  .nmb-btn {
+    font-size: 1.5em;
+    padding: 12px 12px;
   }
 }
