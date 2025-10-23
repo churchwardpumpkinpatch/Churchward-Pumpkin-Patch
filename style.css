@@ -28,7 +28,7 @@ h1 {
 /* Gallery container */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* 3-4 items per row depending on width */
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5em;
   max-width: 1200px;
   margin: 0 auto;
