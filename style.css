@@ -21,44 +21,30 @@ h1 {
   padding: 1em;
   font-family: 'Metal Mania', cursive; /* spooky metal font */
   font-size: 2.5em;
-  text-shadow: 2px 2px 6px #000;
+  text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600;
   border-bottom: 2px solid orange;
 
-  /* Color cycle animation (slower) */
-  animation: colorCycle 6s infinite alternate;
-  position: relative;
+  /* Glowing / flicker animation */
+  animation: flicker 1.5s infinite alternate;
 }
 
-/* Drip effect using pseudo-elements */
-h1::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 15%;
-  width: 5%;
-  height: 12px;
-  background: currentColor;
-  border-radius: 50% 50% 0 0;
-  box-shadow:
-    12px 0 0 currentColor,
-    24px 0 0 currentColor,
-    36px 0 0 currentColor,
-    50px 0 0 currentColor;
-  animation: drip 2s infinite ease-in-out alternate;
-}
-
-/* Color cycling keyframes */
-@keyframes colorCycle {
-  0% { color: orange; }
-  50% { color: green; }
-  100% { color: orange; }
-}
-
-/* Drip animation */
-@keyframes drip {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(3px); }
-  100% { transform: translateY(0); }
+/* Flicker keyframes for glowing effect */
+@keyframes flicker {
+  0% {
+    text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600;
+  }
+  25% {
+    text-shadow: 0 0 8px #ff6600, 0 0 15px #ff6600, 0 0 30px #ff6600;
+  }
+  50% {
+    text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600;
+  }
+  75% {
+    text-shadow: 0 0 12px #ff6600, 0 0 20px #ff6600, 0 0 40px #ff6600;
+  }
+  100% {
+    text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600;
+  }
 }
 
 /* Gallery container */
