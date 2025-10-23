@@ -53,7 +53,7 @@ h1 {
 .print-btn {
   position: absolute;
   bottom: 10px;
-  left: 10px;
+  right: 10px;
   background-color: orange;
   color: black; /* updated per previous request */
   font-family: 'Metal Mania', cursive;
@@ -70,7 +70,7 @@ h1 {
 .nmb-btn {
   position: absolute;
   bottom: 10px;
-  right: 10px;
+  left: 10px;
   background-color: orange;
   color: black; /* updated per previous request */
   font-family: 'Metal Mania', cursive;
