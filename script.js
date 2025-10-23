@@ -54,6 +54,20 @@ const files = [
   'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
+  'assets/AGreatPairOfShoes.pdf',
   'assets/AGreatPairOfShoes.pdf'
   // ...add as many as you like
 ];
@@ -62,8 +76,8 @@ const gallery = document.getElementById('gallery');
 const BATCH_SIZE = 10; // how many to load at once
 let currentIndex = 0;
 let count = 1;
+let isLoading = false; // prevents overlap
 
-// Renders a single PDF preview (your existing logic)
 async function renderPdf(file, number) {
   const container = document.createElement('div');
   container.classList.add('item-container');
@@ -119,23 +133,27 @@ async function renderPdf(file, number) {
   gallery.appendChild(container);
 }
 
-// Load next batch of files
 async function loadNextBatch() {
+  if (isLoading || currentIndex >= files.length) return; // skip if already loading
+  isLoading = true;
+
   const batch = files.slice(currentIndex, currentIndex + BATCH_SIZE);
   for (const file of batch) {
     await renderPdf(file, count++);
   }
-  currentIndex += BATCH_SIZE;
+  currentIndex += batch.length;
+  isLoading = false;
 }
 
-// Initial load
+// initial load
 loadNextBatch();
 
-// Auto-load next batch when near bottom
-window.addEventListener('scroll', () => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 400) {
-    if (currentIndex < files.length) {
-      loadNextBatch();
-    }
+// lazy load on scroll
+window.addEventListener('scroll', async () => {
+  if (
+    !isLoading &&
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 400
+  ) {
+    await loadNextBatch();
   }
 });
