@@ -76,7 +76,7 @@ h1 {
   }
   .print-btn {
     font-size: 2em;
-    padding: 12px 24px; /* smaller button */
+    padding: 6px 12px; /* smaller button */
     font-family: 'Metal Mania', cursive;
     color: black; /* changed from white */
   }
