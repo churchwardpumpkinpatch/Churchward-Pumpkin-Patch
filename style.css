@@ -52,8 +52,8 @@ h1 {
 /* Print button overlay bottom-left */
 .print-btn {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
+  bottom: 34px;
+  left: 34px;
   background-color: orange;
   color: black; /* updated per previous request */
   font-family: 'Metal Mania', cursive;
