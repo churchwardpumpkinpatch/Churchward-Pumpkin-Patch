@@ -1,8 +1,46 @@
-/* Apply to both buttons — keep position relative to the image itself */
+/* Import Metal Mania font in index.html head:
+<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
+*/
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #111;
+  color: #eee;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header / title */
+h1 {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #111;
+  text-align: center;
+  margin: 0;
+  padding: 0.4em 0;
+  font-family: 'Metal Mania', cursive;
+  font-size: 2em;
+  color: orange;
+  border-bottom: 2px solid orange;
+}
+
+/* Gallery container */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 images per row on laptop */
+  gap: 1.5em;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1em;
+  overflow-y: auto;
+}
+
 .item-container {
   position: relative;
+  display: inline-block; /* ensures height matches image height */
   width: 100%;
-  display: inline-block;
+  vertical-align: top;
 }
 
 .gallery-item {
@@ -11,17 +49,11 @@
   display: block;
   border-radius: 10px;
   max-width: 100%;
-  vertical-align: middle;
 }
 
-/* Group both buttons inside image area */
-.item-container button {
-  position: absolute;
-  z-index: 10;
-}
-
-/* Number button - top left */
+/* Number button (always top-left) */
 .nmb-btn {
+  position: absolute;
   top: 10px;
   left: 10px;
   background-color: orange;
@@ -34,11 +66,14 @@
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.4);
   transition: transform 0.1s ease;
+  z-index: 10;
 }
 
-/* Print button - bottom left of the image, regardless of image height */
+/* Print button — bottom-left of the image, anchored correctly */
 .print-btn {
   position: absolute;
+  left: 10px;
+  bottom: 10px;
   background-color: orange;
   color: black;
   font-family: 'Metal Mania', cursive;
@@ -49,27 +84,34 @@
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.4);
   transition: transform 0.1s ease;
-  bottom: 10px;
-  left: 10px;
+  z-index: 10;
 }
 
-/* Ensure image acts as positioning anchor for buttons */
-.item-container {
-  display: inline-block;
-  position: relative;
+/* Hover scale */
+.nmb-btn:hover,
+.print-btn:hover {
+  transform: scale(1.05);
 }
 
-.item-container img,
-.item-container canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  position: relative;
-}
-
-/* Mobile: hide print button entirely */
+/* Mobile adjustments */
 @media (max-width: 600px) {
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+  }
+
+  h1 {
+    font-size: 1.6em;
+    padding: 0.3em 0;
+  }
+
+  /* Only number button visible on mobile */
+  .nmb-btn {
+    font-size: 1.5em;
+    padding: 12px 12px;
+  }
+
   .print-btn {
     display: none;
   }
