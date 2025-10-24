@@ -6,7 +6,6 @@ const files = [
   'assets/alien_xenomorph_co__62942.png',
   'assets/angry_mummy_co__30597.png',
   'assets/athena_co__12762.png',
-  'assets/a_clockwork_skull_co__91054.png',
   'assets/baby_bat_co__88600.png',
   'assets/balloon_animal_dog_co__66168.png',
   'assets/bigfoot_01_co__81423.png',

@@ -49,30 +49,20 @@ h1 {
   max-width: 100%;
 }
 
-/* Print button overlay bottom-left */
-.print-btn {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background-color: orange;
-  color: black; /* updated per previous request */
-  font-family: 'Metal Mania', cursive;
-  font-size: 1.2em;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  transition: transform 0.1s ease;
-}
-
-/* Print button overlay bottom-left */
-.nmb-btn {
+/* Top-left container for both buttons */
+.btn-container {
   position: absolute;
   top: 10px;
-  right: 10px;
+  left: 10px;
+  display: flex;
+  gap: 8px; /* space between number and print button */
+  z-index: 10;
+}
+
+/* Number button */
+.nmb-btn {
   background-color: orange;
-  color: black; /* updated per previous request */
+  color: black;
   font-family: 'Metal Mania', cursive;
   font-size: 1.2em;
   padding: 10px 10px;
@@ -83,7 +73,22 @@ h1 {
   transition: transform 0.1s ease;
 }
 
-.print-btn:hover {
+/* Print button */
+.print-btn {
+  background-color: orange;
+  color: black;
+  font-family: 'Metal Mania', cursive;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: transform 0.1s ease;
+}
+
+.print-btn:hover,
+.nmb-btn:hover {
   transform: scale(1.05);
 }
 
@@ -98,12 +103,11 @@ h1 {
     font-size: 1.6em;
     padding: 0.3em 0;
   }
-  .print-btn {
-    font-size: 1.5em;
-    padding: 12px 24px;
-  }
   .nmb-btn {
     font-size: 1.5em;
     padding: 12px 12px;
+  }
+  .print-btn {
+    display: none; /* hide print button on mobile */
   }
 }
