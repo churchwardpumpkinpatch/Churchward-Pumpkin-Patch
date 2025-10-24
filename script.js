@@ -60,7 +60,7 @@ const files = [
   'assets/witches_cauldron_02_co__17853.png',
   'assets/Wizard_CO.png',
   'assets/zombie_sloth_co__67274.png'
-  ];
+];
 
 const gallery = document.getElementById('gallery');
 const BATCH_SIZE = 10;
@@ -75,7 +75,6 @@ async function renderFile(file, number) {
   const ext = file.split('.').pop().toLowerCase();
 
   if (ext === 'pdf') {
-    // === PDF Preview ===
     const canvas = document.createElement('canvas');
     canvas.classList.add('gallery-item');
     container.appendChild(canvas);
@@ -98,7 +97,6 @@ async function renderFile(file, number) {
       console.error(`Error loading ${file}`, err);
     }
   } else if (['png', 'jpg', 'jpeg', 'gif', 'webp'].includes(ext)) {
-    // === Image Preview ===
     const img = document.createElement('img');
     img.src = file;
     img.classList.add('gallery-item');
@@ -110,24 +108,33 @@ async function renderFile(file, number) {
     return;
   }
 
-  // === Number Button ===
+  // === Buttons wrapper ===
+  const btnWrapper = document.createElement('div');
+  btnWrapper.style.position = 'absolute';
+  btnWrapper.style.top = '10px';
+  btnWrapper.style.left = '10px';
+  btnWrapper.style.display = 'flex';
+  btnWrapper.style.gap = '10px'; // constant gap between buttons
+  container.appendChild(btnWrapper);
+
+  // Number button
   const nmb = document.createElement('button');
   nmb.textContent = number;
   nmb.classList.add('nmb-btn');
+  btnWrapper.appendChild(nmb);
 
-  // === Print Button ===
+  // Print button
   const btn = document.createElement('button');
   btn.textContent = 'Print';
   btn.classList.add('print-btn');
+
   btn.addEventListener('click', () => {
-    // Open the original file directly for print, unscaled
     const newTab = window.open('', '_blank');
     if (!newTab) {
       alert('Please allow pop-ups to enable printing.');
       return;
     }
 
-    // Write minimal markup depending on file type
     if (ext === 'pdf') {
       newTab.document.write(`
         <html><body style="margin:0;padding:0;">
@@ -142,7 +149,6 @@ async function renderFile(file, number) {
       `);
     }
 
-    // Wait for content to load before printing
     newTab.document.close();
     newTab.onload = () => {
       newTab.focus();
@@ -150,11 +156,12 @@ async function renderFile(file, number) {
     };
   });
 
-  container.appendChild(nmb);
-  container.appendChild(btn);
+  btnWrapper.appendChild(btn);
+
   gallery.appendChild(container);
 }
 
+// Lazy load in batches
 async function loadNextBatch() {
   if (isLoading || currentIndex >= files.length) return;
   isLoading = true;
@@ -167,13 +174,12 @@ async function loadNextBatch() {
   isLoading = false;
 }
 
+// Initial load
 loadNextBatch();
 
+// Scroll trigger
 window.addEventListener('scroll', async () => {
-  if (
-    !isLoading &&
-    window.innerHeight + window.scrollY >= document.body.offsetHeight - 400
-  ) {
+  if (!isLoading && window.innerHeight + window.scrollY >= document.body.offsetHeight - 400) {
     await loadNextBatch();
   }
 });
