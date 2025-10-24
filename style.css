@@ -37,8 +37,10 @@ h1 {
 }
 
 .item-container {
-  position: relative; /* allows buttons to overlay images */
+  position: relative;
+  display: inline-block; /* ensures height matches image height */
   width: 100%;
+  vertical-align: top;
 }
 
 .gallery-item {
@@ -67,11 +69,11 @@ h1 {
   z-index: 10;
 }
 
-/* Print button — bottom-left of image (desktop only) */
+/* Print button — bottom-left of the image, anchored correctly */
 .print-btn {
   position: absolute;
-  bottom: 10px;
   left: 10px;
+  bottom: 10px;
   background-color: orange;
   color: black;
   font-family: 'Metal Mania', cursive;
@@ -85,6 +87,7 @@ h1 {
   z-index: 10;
 }
 
+/* Hover scale */
 .nmb-btn:hover,
 .print-btn:hover {
   transform: scale(1.05);
