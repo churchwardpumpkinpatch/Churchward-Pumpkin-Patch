@@ -1,74 +1,6 @@
 const files = [
   'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf',
-  'assets/AGreatPairOfShoes.pdf'
+  'assets/ExampleImage.png'
   // ...add as many as you like
 ];
 
@@ -78,30 +10,47 @@ let currentIndex = 0;
 let count = 1;
 let isLoading = false; // prevents overlap
 
-async function renderPdf(file, number) {
+async function renderFile(file, number) {
   const container = document.createElement('div');
   container.classList.add('item-container');
 
-  const canvas = document.createElement('canvas');
-  canvas.classList.add('gallery-item');
-  container.appendChild(canvas);
+  const ext = file.split('.').pop().toLowerCase();
 
-  try {
-    const loadingTask = pdfjsLib.getDocument(file);
-    const pdf = await loadingTask.promise;
-    const page = await pdf.getPage(1);
+  if (ext === 'pdf') {
+    // === PDF handling ===
+    const canvas = document.createElement('canvas');
+    canvas.classList.add('gallery-item');
+    container.appendChild(canvas);
 
-    const viewport = page.getViewport({ scale: 1 });
-    const maxWidth = Math.min(viewport.width, window.innerWidth - 32);
-    const scale = maxWidth / viewport.width;
-    const scaledViewport = page.getViewport({ scale });
+    try {
+      const loadingTask = pdfjsLib.getDocument(file);
+      const pdf = await loadingTask.promise;
+      const page = await pdf.getPage(1);
 
-    canvas.width = scaledViewport.width;
-    canvas.height = scaledViewport.height;
-    const context = canvas.getContext('2d');
-    await page.render({ canvasContext: context, viewport: scaledViewport }).promise;
-  } catch (err) {
-    console.error(`Error loading ${file}`, err);
+      const viewport = page.getViewport({ scale: 1 });
+      const maxWidth = Math.min(viewport.width, window.innerWidth - 32);
+      const scale = maxWidth / viewport.width;
+      const scaledViewport = page.getViewport({ scale });
+
+      canvas.width = scaledViewport.width;
+      canvas.height = scaledViewport.height;
+      const context = canvas.getContext('2d');
+      await page.render({ canvasContext: context, viewport: scaledViewport }).promise;
+    } catch (err) {
+      console.error(`Error loading ${file}`, err);
+    }
+
+  } else if (['png', 'jpg', 'jpeg', 'gif', 'webp'].includes(ext)) {
+    // === Image handling ===
+    const img = document.createElement('img');
+    img.src = file;
+    img.classList.add('gallery-item');
+    img.loading = 'lazy';
+    img.alt = `Image ${number}`;
+    container.appendChild(img);
+  } else {
+    console.warn(`Unsupported file type for ${file}`);
+    return;
   }
 
   // Number button
@@ -139,7 +88,7 @@ async function loadNextBatch() {
 
   const batch = files.slice(currentIndex, currentIndex + BATCH_SIZE);
   for (const file of batch) {
-    await renderPdf(file, count++);
+    await renderFile(file, count++);
   }
   currentIndex += batch.length;
   isLoading = false;
