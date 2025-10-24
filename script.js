@@ -5,10 +5,10 @@ const files = [
 ];
 
 const gallery = document.getElementById('gallery');
-const BATCH_SIZE = 10; // how many to load at once
+const BATCH_SIZE = 10;
 let currentIndex = 0;
 let count = 1;
-let isLoading = false; // prevents overlap
+let isLoading = false;
 
 async function renderFile(file, number) {
   const container = document.createElement('div');
@@ -17,7 +17,7 @@ async function renderFile(file, number) {
   const ext = file.split('.').pop().toLowerCase();
 
   if (ext === 'pdf') {
-    // === PDF handling ===
+    // === PDF Preview ===
     const canvas = document.createElement('canvas');
     canvas.classList.add('gallery-item');
     container.appendChild(canvas);
@@ -39,9 +39,8 @@ async function renderFile(file, number) {
     } catch (err) {
       console.error(`Error loading ${file}`, err);
     }
-
   } else if (['png', 'jpg', 'jpeg', 'gif', 'webp'].includes(ext)) {
-    // === Image handling ===
+    // === Image Preview ===
     const img = document.createElement('img');
     img.src = file;
     img.classList.add('gallery-item');
@@ -53,28 +52,44 @@ async function renderFile(file, number) {
     return;
   }
 
-  // Number button
+  // === Number Button ===
   const nmb = document.createElement('button');
   nmb.textContent = number;
   nmb.classList.add('nmb-btn');
 
-  // Print button
+  // === Print Button ===
   const btn = document.createElement('button');
   btn.textContent = 'Print';
   btn.classList.add('print-btn');
   btn.addEventListener('click', () => {
-    const newTab = window.open(file, '_blank');
-    if (newTab) {
-      const checkReady = setInterval(() => {
-        if (newTab.document && newTab.document.readyState === 'complete') {
-          clearInterval(checkReady);
-          newTab.focus();
-          newTab.print();
-        }
-      }, 300);
-    } else {
+    // Open the original file directly for print, unscaled
+    const newTab = window.open('', '_blank');
+    if (!newTab) {
       alert('Please allow pop-ups to enable printing.');
+      return;
     }
+
+    // Write minimal markup depending on file type
+    if (ext === 'pdf') {
+      newTab.document.write(`
+        <html><body style="margin:0;padding:0;">
+        <embed src="${file}" type="application/pdf" width="100%" height="100%">
+        </body></html>
+      `);
+    } else {
+      newTab.document.write(`
+        <html><body style="margin:0;padding:0;text-align:center;">
+        <img src="${file}" style="max-width:100%;height:auto;">
+        </body></html>
+      `);
+    }
+
+    // Wait for content to load before printing
+    newTab.document.close();
+    newTab.onload = () => {
+      newTab.focus();
+      newTab.print();
+    };
   });
 
   container.appendChild(nmb);
@@ -83,7 +98,7 @@ async function renderFile(file, number) {
 }
 
 async function loadNextBatch() {
-  if (isLoading || currentIndex >= files.length) return; // skip if already loading
+  if (isLoading || currentIndex >= files.length) return;
   isLoading = true;
 
   const batch = files.slice(currentIndex, currentIndex + BATCH_SIZE);
@@ -94,10 +109,8 @@ async function loadNextBatch() {
   isLoading = false;
 }
 
-// initial load
 loadNextBatch();
 
-// lazy load on scroll
 window.addEventListener('scroll', async () => {
   if (
     !isLoading &&
