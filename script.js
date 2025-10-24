@@ -1,9 +1,49 @@
 const files = [
+  'assets/abstract_flowing_line_co__63292.png',
   'assets/AGreatPairOfShoes.pdf',
+  'assets/alien_birth_co__75467.png',
+  'assets/alien_xenomorph_co__62942.png',
+  'assets/angry_mummy_co__30597.png',
+  'assets/athena_co__12762.png',
+  'assets/a_clockwork_skull_co__91054.png',
+  'assets/baby_bat_co__88600.png',
+  'assets/balloon_animal_dog_co__66168.png',
+  'assets/bigfoot_01_co__81423.png',
+  'assets/black_cat_web_co__75643.png',
+  'assets/bloody_hands_co__15169.png',
+  'assets/celtic_knot_02_co__54959.png',
   'assets/cool_jc_co__85786.png',
-  'assets/cute_kitty_01_co__56270.png'
-  // ...add as many as you like
-];
+  'assets/creation_of_adam_michelangelo_co__11732.png',
+  'assets/cthulhu_02_co__27041.png',
+  'assets/cute_kitty_01_co__56270.png',
+  'assets/diamond_skull_co__13239.png',
+  'assets/don_t_loose_your_head_02_co__96012.png',
+  'assets/don_t_loose_your_head_co__66135.png',
+  'assets/dragon_eye_left_co__06708.png',
+  'assets/dragon_eye_right_co__90460.png',
+  'assets/duck_pond_co__47345.png',
+  'assets/earth_globe_co__28491.png',
+  'assets/evil_clown_03_co__58840.png',
+  'assets/facehugger_co__41501.png',
+  'assets/five_ghost_co__40697.png',
+  'assets/Frankenstein_CO.png',
+  'assets/gargoyle_03_co__61185.png',
+  'assets/glass_skull_co__84437.png',
+  'assets/gorilla_squat_co__57385.png',
+  'assets/grizzly_bear_trees_co__55001.png',
+  'assets/haunted_house_04_co__33334.png',
+  'assets/shhh_co__25576.png',
+  'assets/sick_spiral_co__60367.png',
+  'assets/skull_with_flames_co__48808.png',
+  'assets/the_cats_meow_co__94345.png',
+  'assets/vampire_fangs_01_co__03810.png',
+  'assets/werewolf_02_co__24841.png',
+  'assets/witches_cauldron_02_co__17853.png',
+  'assets/witch_and_cat_silhouette_co__84335.png',
+  'assets/witch_and_spider_silhouette_co__55672.png',
+  'assets/Wizard_CO.png',
+  'assets/zombie_sloth_co__67274.png'
+  ];
 
 const gallery = document.getElementById('gallery');
 const BATCH_SIZE = 10;
