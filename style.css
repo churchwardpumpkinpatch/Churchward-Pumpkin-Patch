@@ -1,113 +1,32 @@
-/* Import Metal Mania font in index.html head:
-<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
-*/
+// Create container for buttons
+const btnContainer = document.createElement('div');
+btnContainer.classList.add('btn-container'); // CSS handles absolute positioning over image
 
-body {
-  font-family: system-ui, sans-serif;
-  background: #111;
-  color: #eee;
-  margin: 0;
-  padding: 0;
-}
+// Number button
+const nmb = document.createElement('button');
+nmb.textContent = count;
+nmb.classList.add('nmb-btn');
+btnContainer.appendChild(nmb);
 
-/* Header / title */
-h1 {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background-color: #111;
-  text-align: center;
-  margin: 0;
-  padding: 0.4em 0; /* Reduced height */
-  font-family: 'Metal Mania', cursive;
-  font-size: 2em;
-  color: orange;
-  border-bottom: 2px solid orange;
-}
-
-/* Gallery container */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5em;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1em;
-  overflow-y: auto; /* scrollable */
-}
-
-.item-container {
-  position: relative;
-  width: 100%;
-}
-
-.gallery-item {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 10px;
-  max-width: 100%;
-}
-
-/* Top-left container for both buttons */
-.btn-container {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  gap: 8px; /* space between number and print button */
-  z-index: 10;
-}
-
-/* Number button */
-.nmb-btn {
-  background-color: orange;
-  color: black;
-  font-family: 'Metal Mania', cursive;
-  font-size: 1.2em;
-  padding: 10px 10px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  transition: transform 0.1s ease;
-}
-
-/* Print button */
-.print-btn {
-  background-color: orange;
-  color: black;
-  font-family: 'Metal Mania', cursive;
-  font-size: 1.2em;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  transition: transform 0.1s ease;
-}
-
-.print-btn:hover,
-.nmb-btn:hover {
-  transform: scale(1.05);
-}
-
-/* Mobile adjustments */
-@media (max-width: 600px) {
-  .gallery {
-    display: flex; /* revert to single-column scroll on mobile */
-    flex-direction: column;
-    gap: 1.5em;
+// Print button
+const btn = document.createElement('button');
+btn.textContent = 'Print';
+btn.classList.add('print-btn');
+btn.addEventListener('click', () => {
+  const newTab = window.open(file, '_blank');
+  if (newTab) {
+    const checkReady = setInterval(() => {
+      if (newTab.document && newTab.document.readyState === 'complete') {
+        clearInterval(checkReady);
+        newTab.focus();
+        newTab.print();
+      }
+    }, 300);
+  } else {
+    alert('Please allow pop-ups to enable printing.');
   }
-  h1 {
-    font-size: 1.6em;
-    padding: 0.3em 0;
-  }
-  .nmb-btn {
-    font-size: 1.5em;
-    padding: 12px 12px;
-  }
-  .print-btn {
-    display: none; /* hide print button on mobile */
-  }
-}
+});
+btnContainer.appendChild(btn);
+
+// Append button container to item-container
+container.appendChild(btnContainer);
