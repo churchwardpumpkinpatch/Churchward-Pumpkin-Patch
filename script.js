@@ -1,6 +1,6 @@
 const files = [
   'assets/AGreatPairOfShoes.pdf',
-  'assets/ExampleImage.png'
+  'assets/cool_jc_co__85786.png'
   // ...add as many as you like
 ];
 
