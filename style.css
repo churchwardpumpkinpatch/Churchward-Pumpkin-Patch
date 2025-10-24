@@ -49,7 +49,7 @@ h1 {
   max-width: 100%;
 }
 
-/* Number button */
+/* Number button (always top-left) */
 .nmb-btn {
   position: absolute;
   top: 10px;
@@ -67,11 +67,11 @@ h1 {
   z-index: 10;
 }
 
-/* Print button */
+/* Print button — bottom-left of image (desktop only) */
 .print-btn {
   position: absolute;
-  top: 10px;
-  left: 60px; /* offset by number button width + gap */
+  bottom: 10px;
+  left: 10px;
   background-color: orange;
   color: black;
   font-family: 'Metal Mania', cursive;
