@@ -1,27 +1,23 @@
-/* Apply to both buttons — keep position relative to the image itself */
+/* Force the container to fit the image's real size */
 .item-container {
   position: relative;
   width: 100%;
   display: inline-block;
+  overflow: hidden; /* ensures the button can't spill below the image */
 }
 
+/* Make sure the image defines the container height */
 .gallery-item {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
   border-radius: 10px;
-  max-width: 100%;
   vertical-align: middle;
 }
 
-/* Group both buttons inside image area */
-.item-container button {
-  position: absolute;
-  z-index: 10;
-}
-
-/* Number button - top left */
+/* Top-left number button */
 .nmb-btn {
+  position: absolute;
   top: 10px;
   left: 10px;
   background-color: orange;
@@ -34,11 +30,14 @@
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.4);
   transition: transform 0.1s ease;
+  z-index: 10;
 }
 
-/* Print button - bottom left of the image, regardless of image height */
+/* Bottom-left print button */
 .print-btn {
   position: absolute;
+  bottom: 10px;
+  left: 10px;
   background-color: orange;
   color: black;
   font-family: 'Metal Mania', cursive;
@@ -49,26 +48,21 @@
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.4);
   transition: transform 0.1s ease;
-  bottom: 10px;
-  left: 10px;
+  z-index: 10;
 }
 
-/* Ensure image acts as positioning anchor for buttons */
-.item-container {
-  display: inline-block;
-  position: relative;
+/* Maintain your gallery grid layout */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1em;
+  overflow-y: auto;
 }
 
-.item-container img,
-.item-container canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  position: relative;
-}
-
-/* Mobile: hide print button entirely */
+/* Hide print button on mobile */
 @media (max-width: 600px) {
   .print-btn {
     display: none;
