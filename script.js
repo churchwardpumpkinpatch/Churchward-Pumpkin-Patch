@@ -1,4 +1,5 @@
 const files = [
+  'assets/pumpkinStencilsQr.png',
   'assets/a_clockwork_skull_co__91054.png',
   'assets/abstract_flowing_line_co__63292.png',
   'assets/AGreatPairOfShoes.pdf',
